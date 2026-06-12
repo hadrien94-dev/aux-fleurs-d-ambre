@@ -1,0 +1,1219 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Aux fleurs d'Ambre — Fleuriste Artisan · Vincennes</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --rose-poudre: #F2D7D9;
+      --vert-mousse: #4A6741;
+      --ivoire: #FAF8F4;
+      --bordeaux: #7B2D3E;
+      --or-chaud: #C9A84C;
+      --gris-pierre: #6B6560;
+      --blanc: #FFFFFF;
+      --sombre: #2C2520;
+      --fond-leger: #FDFCFB;
+      --bordure: #EBE6DF;
+    }
+
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--ivoire);
+      color: var(--sombre);
+      overflow-x: hidden;
+    }
+
+    .floral-strip {
+      width: 100%;
+      height: 18px;
+      background-image: url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Crect width='40' height='40' fill='%23FAF8F4'/%3E%3Cpath d='M20,10 Q23,16 20,22 Q17,16 20,10 Z' fill='%237B2D3E' opacity='0.4'/%3E%3Cpath d='M10,20 Q16,23 22,20 Q16,17 10,20 Z' fill='%237B2D3E' opacity='0.4'/%3E%3Ccircle cx='20' cy='20' r='3' fill='%23C9A84C'/%3E%3C/svg%3E");
+      background-repeat: repeat-x;
+      background-size: 40px 18px;
+      opacity: 0.85;
+    }
+
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      background: rgba(250,248,244,0.96);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--bordure);
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 2.5rem; height: 64px;
+    }
+    
+    .nav-logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.45rem; font-weight: 700;
+      color: var(--bordeaux); letter-spacing: -0.01em;
+      text-decoration: none; cursor: pointer;
+      display: flex; align-items: center; gap: 0.5rem;
+    }
+    
+    .nav-logo-tile {
+      width: 28px; height: 28px;
+      background-image: url("data:image/svg+xml,%3Csvg width='28' height='28' viewBox='0 0 28 28' xmlns='http://www.w3.org/2000/svg'%3E%3Crect width='28' height='28' fill='%23F2D7D9' opacity='0.5'/%3E%3Ccircle cx='14' cy='14' r='6' fill='%237B2D3E'/%3E%3Ccircle cx='14' cy='14' r='2' fill='%23C9A84C'/%3E%3C/svg%3E");
+      border-radius: 5px; flex-shrink: 0;
+    }
+    
+    .nav-links { display: flex; gap: 1.8rem; list-style: none; }
+    
+    .nav-links a {
+      font-size: 0.82rem; font-weight: 500; letter-spacing: 0.05em;
+      text-transform: uppercase; color: var(--gris-pierre);
+      text-decoration: none; transition: color 0.2s; cursor: pointer;
+    }
+    
+    .nav-links a:hover, .nav-links a.active { color: var(--bordeaux); }
+    
+    .nav-socials {
+      display: flex; gap: 0.5rem; align-items: center;
+    }
+
+    .nav-social-btn {
+      background: var(--bordeaux); color: var(--blanc);
+      border: none; border-radius: 4px;
+      padding: 0.5rem; font-size: 0.8rem; font-weight: 600;
+      cursor: pointer; transition: background 0.2s;
+      text-transform: uppercase; letter-spacing: 0.05em;
+      text-decoration: none; display: flex; align-items: center; justify-content: center;
+    }
+
+    .nav-social-btn:hover { background: var(--vert-mousse); }
+    
+    .nav-burger { display: none; flex-direction: column; gap: 5px; cursor: pointer; }
+    
+    .nav-burger span { width: 24px; height: 2px; background: var(--sombre); display: block; transition: all 0.3s; }
+
+    .page { display: none; min-height: 100vh; padding-top: 64px; }
+    
+    .page.active { display: block; }
+
+    .hero {
+      min-height: calc(100vh - 64px);
+      display: grid; grid-template-columns: 1fr 1fr;
+      align-items: stretch;
+    }
+    
+    .hero-text {
+      padding: 5rem 4rem 5rem 5rem;
+      display: flex; flex-direction: column; justify-content: flex-start;
+    }
+    
+    .hero-eyebrow {
+      font-size: 0.72rem; font-weight: 600; letter-spacing: 0.16em;
+      text-transform: uppercase; color: var(--bordeaux);
+      margin-bottom: 1.4rem; display: flex; align-items: center; gap: 0.6rem;
+    }
+    
+    .hero-eyebrow::before {
+      content: ''; display: inline-block;
+      width: 28px; height: 1px; background: var(--bordeaux);
+    }
+    
+    .hero-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.5rem, 4vw, 3.8rem);
+      line-height: 1.15; font-weight: 700;
+      color: var(--sombre); margin-bottom: 1.6rem;
+    }
+    
+    .hero-title em { font-style: italic; color: var(--vert-mousse); }
+    
+    .hero-desc {
+      font-size: 1rem; line-height: 1.75; color: var(--gris-pierre);
+      max-width: 460px; margin-bottom: 2.5rem;
+    }
+    
+    .hero-pills {
+      display: flex; gap: 0.6rem; flex-wrap: wrap; margin-bottom: 2.5rem;
+    }
+    
+    .pill {
+      font-size: 0.75rem; font-weight: 500; padding: 0.35rem 0.9rem;
+      border-radius: 20px; border: 1px solid var(--rose-poudre);
+      color: var(--bordeaux); background: var(--fond-leger);
+      letter-spacing: 0.03em;
+    }
+    
+    .hero-actions { display: flex; gap: 1rem; flex-wrap: wrap; align-items: center; }
+    
+    .btn-primary {
+      background: var(--bordeaux); color: var(--blanc);
+      padding: 0.85rem 2rem; border-radius: 4px;
+      font-size: 0.88rem; font-weight: 600; border: none;
+      cursor: pointer; transition: background 0.2s;
+      text-decoration: none; display: inline-block;
+    }
+    
+    .btn-primary:hover { background: var(--vert-mousse); }
+    
+    .btn-secondary {
+      background: transparent; color: var(--sombre);
+      padding: 0.85rem 2rem; border-radius: 4px;
+      font-size: 0.88rem; font-weight: 500;
+      border: 1.5px solid var(--bordure); cursor: pointer;
+      transition: all 0.2s;
+    }
+    
+    .btn-secondary:hover { border-color: var(--bordeaux); color: var(--bordeaux); }
+
+    .hero-visual {
+      display: block;
+      min-height: calc(100vh - 64px);
+    }
+    
+    .hero-photo {
+      height: 100%;
+      overflow: hidden; position: relative;
+    }
+    
+    .hero-photo img {
+      width: 100%; height: 100%; object-fit: cover;
+      transition: transform 0.6s ease;
+    }
+    
+    .hero-photo:hover img { transform: scale(1.02); }
+
+    .floral-divider {
+      height: 48px;
+      background-image: url("data:image/svg+xml,%3Csvg width='40' height='48' viewBox='0 0 40 48' xmlns='http://www.w3.org/2000/svg'%3E%3Crect width='40' height='48' fill='%23FAF8F4'/%3E%3Cpath d='M20,4 Q24,14 20,24 Q16,14 20,4 Z' fill='%234A6741' opacity='0.25'/%3E%3Cpath d='M20,24 Q24,34 20,44 Q16,34 20,24 Z' fill='%234A6741' opacity='0.25'/%3E%3Ccircle cx='20' cy='24' r='2' fill='%23C9A84C'/%3E%3C/svg%3E");
+      background-repeat: repeat-x;
+      background-size: 40px 48px;
+      border-top: 1px solid var(--rose-poudre);
+      border-bottom: 1px solid var(--rose-poudre);
+    }
+
+    .features {
+      background: var(--ivoire);
+      padding: 5rem;
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 3.5rem;
+    }
+    
+    .feature h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.15rem; margin-bottom: 0.7rem; color: var(--sombre);
+    }
+    
+    .feature p { font-size: 0.88rem; line-height: 1.75; color: var(--gris-pierre); }
+    
+    .feature-emoji { font-size: 1.8rem; margin-bottom: 0.5rem; }
+
+    .section-header { text-align: center; margin-bottom: 3.5rem; }
+    
+    .section-eyebrow {
+      font-size: 0.7rem; font-weight: 700; letter-spacing: 0.18em;
+      text-transform: uppercase; color: var(--bordeaux); margin-bottom: 0.8rem;
+      display: flex; align-items: center; justify-content: center; gap: 0.8rem;
+    }
+    
+    .section-eyebrow::before, .section-eyebrow::after {
+      content: ''; display: inline-block; width: 24px; height: 1px; background: var(--bordeaux);
+    }
+    
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.9rem, 3vw, 2.6rem); font-weight: 700;
+      color: var(--sombre); line-height: 1.15;
+    }
+    
+    .section-title em { font-style: italic; color: var(--bordeaux); }
+    
+    .section-sub {
+      margin-top: 1rem; font-size: 0.95rem; color: var(--gris-pierre);
+      max-width: 500px; margin-left: auto; margin-right: auto; line-height: 1.65;
+    }
+
+    #page-creations { background: var(--fond-leger); }
+
+    .menu-wrap { max-width: 1080px; margin: 0 auto; padding: 5rem 2rem; }
+    
+    .menu-tabs {
+      display: flex; gap: 0.5rem; margin-bottom: 3rem; flex-wrap: wrap;
+    }
+    
+    .tab-btn {
+      padding: 0.55rem 1.3rem; border-radius: 30px;
+      font-size: 0.82rem; font-weight: 500; cursor: pointer;
+      border: 1.5px solid var(--bordure);
+      background: var(--blanc); color: var(--gris-pierre);
+      transition: all 0.2s; letter-spacing: 0.03em;
+    }
+    
+    .tab-btn.active, .tab-btn:hover {
+      background: var(--bordeaux); color: var(--blanc); border-color: var(--bordeaux);
+    }
+    
+    .menu-category { display: none; }
+    
+    .menu-category.active { display: block; }
+    
+    .menu-grid {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 1.2rem;
+    }
+    
+    .menu-card {
+      background: var(--blanc); border-radius: 8px;
+      padding: 1.4rem 1.5rem;
+      border: 1px solid var(--bordure);
+      transition: box-shadow 0.2s, transform 0.2s;
+    }
+    
+    .menu-card:hover { box-shadow: 0 8px 25px rgba(123, 45, 62, 0.06); transform: translateY(-3px); }
+    
+    .menu-card-top {
+      display: flex; justify-content: space-between;
+      align-items: flex-start; margin-bottom: 0.4rem;
+    }
+    
+    .menu-card-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 1rem; font-weight: 600; color: var(--sombre);
+    }
+    
+    .menu-card-price {
+      font-weight: 700; color: var(--bordeaux); font-size: 0.95rem;
+      white-space: nowrap; margin-left: 0.5rem;
+    }
+    
+    .menu-card-desc {
+      font-size: 0.82rem; color: var(--gris-pierre); line-height: 1.55;
+      margin-top: 0.2rem;
+    }
+    
+    .menu-card-tag {
+      display: inline-block; font-size: 0.68rem; font-weight: 600;
+      padding: 0.18rem 0.55rem; border-radius: 3px;
+      background: var(--rose-poudre); color: var(--bordeaux);
+      letter-spacing: 0.06em; text-transform: uppercase; margin-top: 0.7rem;
+    }
+    
+    .menu-note {
+      font-size: 0.8rem; color: var(--gris-pierre); font-style: italic;
+      margin-top: 0.6rem; background: var(--ivoire);
+      padding: 0.5rem 0.8rem; border-radius: 4px;
+    }
+
+    #page-galerie { background: var(--ivoire); }
+    
+    .galerie-wrap { max-width: 1200px; margin: 0 auto; padding: 5rem 2rem; }
+    
+    .photo-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      grid-auto-rows: 260px;
+      gap: 12px;
+    }
+    
+    .photo-grid-item {
+      overflow: hidden; border-radius: 6px; cursor: pointer;
+      position: relative;
+    }
+    
+    .photo-grid-item img {
+      width: 100%; height: 100%; object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+    
+    .photo-grid-item:hover img { transform: scale(1.05); }
+    
+    .photo-grid-item.tall { grid-row: span 2; }
+    
+    .photo-grid-item.wide { grid-column: span 2; }
+
+    .lightbox {
+      position: fixed; inset: 0; background: rgba(44,37,32,0.95);
+      z-index: 999; display: none; align-items: center; justify-content: center;
+    }
+    
+    .lightbox.open { display: flex; }
+    
+    .lightbox img {
+      max-width: 90vw; max-height: 90vh;
+      border-radius: 6px; object-fit: contain;
+    }
+    
+    .lightbox-close {
+      position: absolute; top: 1.5rem; right: 2rem;
+      color: var(--blanc); font-size: 2rem; cursor: pointer;
+      font-family: 'Inter', sans-serif; font-weight: 300;
+      background: none; border: none;
+    }
+
+    .azulejo-showcase {
+      background: var(--fond-leger);
+      padding: 4rem 5rem;
+      display: grid; grid-template-columns: 1fr 1fr; gap: 4rem;
+      align-items: center;
+      border-top: 1px solid var(--rose-poudre);
+      border-bottom: 1px solid var(--rose-poudre);
+    }
+    
+    .azulejo-showcase-text h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.8rem; margin-bottom: 1rem; color: var(--sombre);
+    }
+    
+    .azulejo-showcase-text h3 em { font-style: italic; color: var(--bordeaux); }
+    
+    .azulejo-showcase-text p {
+      font-size: 0.92rem; line-height: 1.75; color: var(--gris-pierre);
+    }
+    
+    .azulejo-wall {
+      border-radius: 10px; overflow: hidden;
+      box-shadow: 0 12px 40px rgba(123,45,62,0.1);
+    }
+
+    .histoire-wrap { max-width: 900px; margin: 0 auto; padding: 5rem 2rem; }
+    
+    .histoire-hero {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 4rem;
+      align-items: center; margin-bottom: 5rem;
+    }
+    
+    .histoire-text h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 2rem; line-height: 1.2; margin-bottom: 1.4rem;
+    }
+    
+    .histoire-text h2 em { font-style: italic; color: var(--bordeaux); }
+    
+    .histoire-text p {
+      font-size: 0.92rem; line-height: 1.8; color: var(--gris-pierre);
+      margin-bottom: 1rem;
+    }
+    
+    .histoire-photo {
+      border-radius: 10px; overflow: hidden; position: relative;
+      height: 400px;
+    }
+    
+    .histoire-photo img {
+      width: 100%; height: 100%; object-fit: cover;
+    }
+    
+    .histoire-values {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem;
+    }
+    
+    .value-card {
+      padding: 2rem 1.5rem; border-radius: 10px;
+      background: var(--ivoire);
+      border: 1px solid var(--rose-poudre);
+      text-align: center;
+    }
+    
+    .value-card-icon { font-size: 2rem; margin-bottom: 0.8rem; }
+    
+    .value-card h4 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.05rem; margin-bottom: 0.6rem; color: var(--sombre);
+    }
+    
+    .value-card p { font-size: 0.82rem; color: var(--gris-pierre); line-height: 1.65; }
+
+    .avis-wrap { max-width: 1020px; margin: 0 auto; padding: 5rem 2rem; }
+
+    .avis-summary {
+      display: flex; flex-direction: column; justify-content: center; align-items: center;
+      background: var(--fond-leger); border-radius: 12px;
+      padding: 2.5rem; margin-bottom: 3rem;
+      border: 1px solid var(--rose-poudre);
+      text-align: center;
+      gap: 1.5rem;
+    }
+    
+    .avis-big-num {
+      font-family: 'Playfair Display', serif;
+      font-size: 4rem; font-weight: 700; color: var(--bordeaux); line-height: 1;
+    }
+    
+    .avis-big-stars { font-size: 1.4rem; color: var(--or-chaud); margin: 0.4rem 0; }
+    
+    .avis-big-count { font-size: 0.9rem; color: var(--gris-pierre); }
+
+    .avis-google-btn {
+      background: var(--bordeaux);
+      color: var(--blanc);
+      padding: 0.8rem 2rem;
+      border-radius: 4px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: background 0.2s;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .avis-google-btn:hover {
+      background: var(--vert-mousse);
+    }
+    
+    .avis-grid {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+      gap: 1.2rem;
+    }
+    
+    .avis-card {
+      background: var(--blanc); border-radius: 10px;
+      border: 1px solid var(--bordure); padding: 1.4rem;
+    }
+    
+    .avis-card-top {
+      display: flex; align-items: center; gap: 0.8rem; margin-bottom: 0.8rem;
+    }
+    
+    .avis-avatar {
+      width: 40px; height: 40px; border-radius: 50%;
+      background: var(--bordeaux); display: flex; align-items: center;
+      justify-content: center; font-weight: 700; color: var(--blanc); font-size: 0.85rem;
+      flex-shrink: 0;
+    }
+    
+    .avis-author { font-weight: 600; font-size: 0.88rem; color: var(--sombre); }
+    
+    .avis-date { font-size: 0.72rem; color: var(--gris-pierre); }
+    
+    .avis-stars { color: var(--or-chaud); font-size: 0.85rem; margin-bottom: 0.5rem; }
+    
+    .avis-text { font-size: 0.85rem; line-height: 1.65; color: var(--gris-pierre); }
+
+    .contact-wrap {
+      max-width: 920px; margin: 0 auto; padding: 5rem 2rem;
+      display: grid; grid-template-columns: 1fr 1fr; gap: 4rem;
+    }
+    
+    .contact-info h2 {
+      font-family: 'Playfair Display', serif; font-size: 1.8rem; margin-bottom: 0.5rem;
+    }
+    
+    .contact-info > p { font-size: 0.92rem; color: var(--gris-pierre); margin-bottom: 2rem; line-height: 1.65; }
+    
+    .contact-block { margin-bottom: 1.8rem; }
+    
+    .contact-block-label {
+      font-size: 0.68rem; font-weight: 700; letter-spacing: 0.12em;
+      text-transform: uppercase; color: var(--bordeaux); margin-bottom: 0.4rem;
+    }
+    
+    .contact-block p { font-size: 0.92rem; line-height: 1.65; color: var(--sombre); }
+    
+    .contact-block a { color: var(--bordeaux); text-decoration: none; }
+    
+    .contact-block a:hover { text-decoration: underline; }
+    
+    .horaires-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 0.25rem 1rem;
+      font-size: 0.85rem;
+    }
+    
+    .horaires-day { color: var(--gris-pierre); }
+    
+    .horaires-time { font-weight: 500; }
+    
+    .access-list { list-style: none; }
+    
+    .access-list li {
+      font-size: 0.88rem; color: var(--sombre); padding: 0.25rem 0;
+      display: flex; align-items: center; gap: 0.5rem;
+    }
+    
+    .access-list li::before {
+      content: '✓'; color: var(--vert-mousse); font-weight: 700; font-size: 0.85rem;
+    }
+    
+    .contact-form h2 {
+      font-family: 'Playfair Display', serif; font-size: 1.8rem; margin-bottom: 0.5rem;
+    }
+    
+    .contact-form > p { font-size: 0.92rem; color: var(--gris-pierre); margin-bottom: 2rem; }
+    
+    .form-group { margin-bottom: 1.2rem; }
+    
+    .form-group label {
+      display: block; font-size: 0.75rem; font-weight: 600;
+      text-transform: uppercase; letter-spacing: 0.06em;
+      color: var(--gris-pierre); margin-bottom: 0.4rem;
+    }
+    
+    .form-group input, .form-group textarea, .form-group select {
+      width: 100%; padding: 0.7rem 0.9rem;
+      border: 1.5px solid var(--bordure); border-radius: 5px;
+      font-family: 'Inter', sans-serif; font-size: 0.88rem;
+      background: var(--blanc); color: var(--sombre);
+      transition: border-color 0.2s;
+    }
+    
+    .form-group input:focus, .form-group textarea:focus {
+      outline: none; border-color: var(--bordeaux);
+    }
+    
+    .form-group textarea { resize: vertical; min-height: 110px; }
+    
+    .form-submit {
+      width: 100%; background: var(--bordeaux); color: var(--blanc);
+      border: none; border-radius: 5px; padding: 0.9rem;
+      font-size: 0.88rem; font-weight: 700; cursor: pointer;
+      transition: background 0.2s; letter-spacing: 0.04em;
+    }
+    
+    .form-submit:hover { background: var(--vert-mousse); }
+
+    .map-container {
+      width: 100%;
+      margin-top: 2rem;
+      border-radius: 8px;
+      overflow: hidden;
+      border: 1px solid var(--rose-poudre);
+      box-shadow: 0 4px 12px rgba(123,45,62,0.03);
+    }
+
+    .map-container iframe {
+      width: 100%;
+      display: block;
+    }
+
+    .legales-wrap { max-width: 780px; margin: 0 auto; padding: 5rem 2rem; }
+    
+    .legales-wrap h1 { font-family: 'Playfair Display', serif; font-size: 2rem; margin-bottom: 0.5rem; }
+    
+    .legales-tabs { display: flex; gap: 0.5rem; margin: 2rem 0 3rem; flex-wrap: wrap; }
+    
+    .legales-tab {
+      padding: 0.5rem 1.2rem; border-radius: 30px; cursor: pointer;
+      font-size: 0.82rem; font-weight: 500; border: 1.5px solid var(--bordure);
+      background: var(--blanc); color: var(--gris-pierre); transition: all 0.2s;
+    }
+    
+    .legales-tab.active { background: var(--bordeaux); color: var(--blanc); border-color: var(--bordeaux); }
+    
+    .legales-section { display: none; }
+    
+    .legales-section.active { display: block; }
+    
+    .legales-section h2 {
+      font-family: 'Playfair Display', serif; font-size: 1.2rem;
+      margin: 2rem 0 0.7rem; color: var(--sombre);
+    }
+    
+    .legales-section p, .legales-section li {
+      font-size: 0.88rem; line-height: 1.8; color: var(--gris-pierre); margin-bottom: 0.7rem;
+    }
+    
+    .legales-section ul { padding-left: 1.5rem; }
+    
+    .placeholder-notice {
+      background: #FFF8E7; border: 1.5px dashed #C8A84B;
+      border-radius: 6px; padding: 1rem 1.2rem; margin-bottom: 1.5rem;
+      font-size: 0.82rem; color: #7A5A00;
+    }
+
+    footer {
+      background: var(--bordeaux);
+      color: rgba(255,255,255,0.6);
+      padding: 3.5rem 5rem 2rem;
+      display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 3rem;
+    }
+    
+    footer h4 {
+      font-family: 'Playfair Display', serif;
+      font-size: 0.95rem; color: rgba(255,255,255,0.9); margin-bottom: 1rem;
+      letter-spacing: 0.02em;
+    }
+    
+    footer p, footer a {
+      font-size: 0.82rem; line-height: 1.9; color: rgba(255,255,255,0.65);
+      text-decoration: none; display: block;
+    }
+    
+    footer a:hover { color: rgba(255,255,255,0.9); }
+    
+    .footer-logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.5rem; color: var(--blanc);
+      margin-bottom: 0.8rem; font-weight: 700;
+      display: flex; align-items: center; gap: 0.5rem;
+    }
+    
+    .footer-tile-sm {
+      width: 22px; height: 22px; opacity: 0.7;
+      background-image: url("data:image/svg+xml,%3Csvg width='22' height='22' viewBox='0 0 22 22' xmlns='http://www.w3.org/2000/svg'%3E%3Crect width='22' height='22' fill='%23FAF8F4' opacity='0.15'/%3E%3Ccircle cx='11' cy='11' r='4' fill='white'/%3E%3C/svg%3E");
+    }
+    
+    .footer-bottom {
+      background: rgba(0,0,0,0.15);
+      padding: 1rem 5rem;
+      font-size: 0.75rem; color: rgba(255,255,255,0.4);
+      display: flex; justify-content: space-between; align-items: center;
+    }
+
+    .toast {
+      position: fixed; bottom: 2rem; right: 2rem; z-index: 999;
+      background: var(--vert-mousse); color: var(--blanc);
+      padding: 0.8rem 1.5rem; border-radius: 5px;
+      font-size: 0.88rem; font-weight: 500;
+      transform: translateY(100px); opacity: 0;
+      transition: all 0.3s; pointer-events: none;
+    }
+    
+    .toast.show { transform: translateY(0); opacity: 1; }
+
+    @media (max-width: 960px) {
+      .hero { grid-template-columns: 1fr; }
+      .hero-visual { display: none; }
+      .hero-text { padding: 3rem 1.5rem; }
+      .features { grid-template-columns: 1fr; padding: 3rem 1.5rem; gap: 2rem; }
+      .histoire-hero { grid-template-columns: 1fr; }
+      .histoire-values { grid-template-columns: 1fr 1fr; }
+      .contact-wrap { grid-template-columns: 1fr; }
+      .azulejo-showcase { grid-template-columns: 1fr; padding: 3rem 1.5rem; }
+      footer { grid-template-columns: 1fr 1fr; padding: 2.5rem 1.5rem; gap: 2rem; }
+      .footer-bottom { padding: 1rem 1.5rem; flex-direction: column; gap: 0.3rem; text-align: center; }
+      nav { padding: 0 1.5rem; }
+      .nav-links { display: none; }
+      .nav-links.open {
+        display: flex; flex-direction: column;
+        position: fixed; top: 64px; left: 0; right: 0;
+        background: var(--ivoire); padding: 1.5rem 2rem;
+        border-bottom: 1px solid var(--bordure); z-index: 99;
+        gap: 1rem;
+      }
+      .nav-burger { display: flex; }
+      .nav-socials { display: none; }
+      .photo-grid { grid-template-columns: 1fr 1fr; }
+    }
+    
+    @media (max-width: 580px) {
+      .photo-grid { grid-template-columns: 1fr; grid-auto-rows: 220px; }
+      .photo-grid-item.tall, .photo-grid-item.wide { grid-row: span 1; grid-column: span 1; }
+      .histoire-values { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <div class="nav-logo" onclick="showPage('accueil')">
+      <div class="nav-logo-tile"></div>
+      Aux fleurs d'Ambre
+    </div>
+    <ul class="nav-links" id="navLinks">
+      <li><a onclick="showPage('accueil')" data-page="accueil">Accueil</a></li>
+      <li><a onclick="showPage('creations')" data-page="creations">Créations</a></li>
+      <li><a onclick="showPage('galerie')" data-page="galerie">Galerie</a></li>
+      <li><a onclick="showPage('histoire')" data-page="histoire">Notre histoire</a></li>
+      <li><a onclick="showPage('avis')" data-page="avis">Avis</a></li>
+      <li><a onclick="showPage('contact')" data-page="contact">Contact</a></li>
+    </ul>
+    
+    <div class="nav-socials">
+      <a href="https://www.google.fr/maps/place/Aux+fleurs+d%E2%80%99Ambre/@48.847464,2.4368578,17z/data=!4m6!3m5!1s0x47e673b6c4b89c99:0x79a84c1f6445c200!8m2!3d48.847464!4d2.4368578!16s%2Fg%2F11nj9n1bl7?hl=fr&entry=ttu&g_ep=EgoyMDI2MDYwMy4xIKXMDSoASAFQAw%3D%3D" target="_blank" class="nav-social-btn icon-only" title="Google Maps">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+          <circle cx="12" cy="10" r="3"></circle>
+        </svg>
+      </a>
+      <a href="https://www.instagram.com/auxfleursdambre/" target="_blank" class="nav-social-btn icon-only" title="Instagram">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="2" y="2" width="20" height="20" rx="5"></rect>
+          <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+          <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+        </svg>
+      </a>
+    </div>
+
+    <div class="nav-burger" id="burger" onclick="toggleMenu()">
+      <span></span><span></span><span></span>
+    </div>
+  </nav>
+
+  <div class="page active" id="page-accueil">
+    <section class="hero">
+      <div class="hero-text">
+        <p class="hero-eyebrow">Fleuriste artisan · Vincennes</p>
+        <h1 class="hero-title">L'art floral au<br><em>cœur</em> de Vincennes</h1>
+        <p class="hero-desc">Des fleurs qui parlent à votre place. Antony conçoit pour vous des créations végétales uniques et sur-mesure pour célébrer chaque émotion de la vie.</p>
+        <div class="hero-pills">
+          <span class="pill">💐 Bouquets sur-mesure</span>
+          <span class="pill">🎊 Mariages & événements</span>
+          <span class="pill">🌿 Fleurs de saison</span>
+          <span class="pill">🏥 Décoration entreprises</span>
+          <span class="pill">⭐ 5,0 · 49 avis Google</span>
+        </div>
+        <div class="hero-actions">
+          <button class="btn-primary" onclick="showPage('creations')">Découvrir nos créations</button>
+          <button class="btn-secondary" onclick="showPage('contact')">Nous trouver →</button>
+        </div>
+      </div>
+      <div class="hero-visual">
+        <div class="hero-photo" onclick="openLightbox('https://images.unsplash.com/photo-1487530811015-780780169923?auto=format&fit=crop&w=1200&q=80')">
+          <img src="https://images.unsplash.com/photo-1487530811015-780780169923?auto=format&fit=crop&w=1200&q=80" alt="Bouquet de roses et pivoines rose pâle" loading="lazy" />
+        </div>
+      </div>
+    </section>
+
+    <div class="floral-divider"></div>
+
+    <section class="features">
+      <div class="feature">
+        <div class="feature-emoji">🌿</div>
+        <h3>Fraîcheur absolue</h3>
+        <p>Arrivages hebdomadaires et sélection rigoureuse de fleurs fraîches et de saison. Vos compositions conservent tout leur éclat durablement.</p>
+      </div>
+      <div class="feature">
+        <div class="feature-emoji">🤝</div>
+        <h3>Créations sur-mesure</h3>
+        <p>Chaque composition florale est entièrement unique, piochée et pensée main dans la main avec vous selon l'événement et votre sensibilité.</p>
+      </div>
+      <div class="feature">
+        <div class="feature-emoji">💚</div>
+        <h3>Artisan de quartier</h3>
+        <p>Un fleuriste passionné, profondément ancré à Vincennes, dévoué à un service attentionné et haut de gamme loin des standards industriels.</p>
+      </div>
+    </section>
+
+    <section class="azulejo-showcase">
+      <div class="azulejo-showcase-text">
+        <h3>Le respect de la <em>saisonnalité</em></h3>
+        <p>Nous sélectionnons nos variétés au rythme de la nature. Des douces pivoines du printemps aux bouquets chauds et texturés de l'automne, chaque saison inspire notre art floral pour vous proposer de la nouveauté toute l'année.</p>
+        <p style="margin-top:0.8rem;">Venez découvrir l'ambiance chaleureuse de notre boutique vincennoise et laissez-vous guider par nos inspirations parfumées.</p>
+        
+        <div style="margin-top: 2rem;">
+          <iframe src="https://maps.google.com/maps?q=Aux+fleurs+d'Ambre+Vincennes+35+avenue+du+château&output=embed" width="100%" height="200" style="border:0; border-radius:8px; border: 1px solid var(--rose-poudre);" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
+      </div>
+      <div class="azulejo-wall">
+        <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&w=800&q=80" alt="Boutique Aux fleurs d'Ambre" style="width:100%; height:100%; object-fit:cover; border-radius: 10px; display: block;">
+      </div>
+    </section>
+  </div>
+
+  <div class="page" id="page-creations">
+    <div class="menu-wrap">
+      <div class="section-header">
+        <p class="section-eyebrow">Art floral & botanique</p>
+        <h2 class="section-title">Nos <em>Créations</em></h2>
+        <p class="section-sub">Chaque bouquet est un assemblage d'émotions. Découvrez nos inspirations phares adaptables à toutes vos envies.</p>
+      </div>
+
+      <div class="menu-tabs">
+        <button class="tab-btn active" onclick="showCategory('bouquets', event)">💐 Bouquets</button>
+        <button class="tab-btn" onclick="showCategory('offrir', event)">🌹 À offrir</button>
+        <button class="tab-btn" onclick="showCategory('evenements', event)">🎊 Événements</button>
+      </div>
+
+      <div class="menu-category active" id="cat-bouquets">
+        <div class="menu-grid">
+          <div class="menu-card">
+            <div class="menu-card-top"><span class="menu-card-name">Bouquet champêtre</span><span class="menu-card-price">Dès 25 €</span></div>
+            <p class="menu-card-desc">Compositions de saison sauvages et légères, fraîcheur et authenticité garanties.</p>
+          </div>
+          <div class="menu-card">
+            <div class="menu-card-top"><span class="menu-card-name">Bouquet rond signature</span><span class="menu-card-price">Dès 30 €</span></div>
+            <p class="menu-card-desc">Un équilibre parfait de formes et de nuances pour un cadeau tout en douceur.</p>
+          </div>
+          <div class="menu-card">
+            <div class="menu-card-top"><span class="menu-card-name">Bouquet végétal pur</span><span class="menu-card-price">Dès 28 €</span></div>
+            <p class="menu-card-desc">Accent mis sur les textures de feuillages fins, d'eucalyptus et de fleurs graphiques.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="menu-category" id="cat-offrir">
+        <div class="menu-grid">
+          <div class="menu-card">
+            <div class="menu-card-top"><span class="menu-card-name">Bouquet de pivoines</span><span class="menu-card-price">35 €</span></div>
+            <p class="menu-card-desc">Notre fleur vedette du printemps. Généreuse, parfumée et éclatante.</p>
+            <span class="menu-card-tag">⭐ Best-seller</span>
+          </div>
+          <div class="menu-card">
+            <div class="menu-card-top"><span class="menu-card-name">Sélection de roses d'exception</span><span class="menu-card-price">Dès 30 €</span></div>
+            <p class="menu-card-desc">Roses de grande qualité aux tiges impeccables et parfums profonds.</p>
+          </div>
+          <div class="menu-card">
+            <div class="menu-card-top"><span class="menu-card-name">Compositions en vase</span><span class="menu-card-price">Dès 40 €</span></div>
+            <p class="menu-card-desc">Créations piquées élégantes livrées directement dans leur contenant en verre ou céramique.</p>
+          </div>
+          <div class="menu-card">
+            <div class="menu-card-top"><span class="menu-card-name">Plantes d'intérieur & déco</span><span class="menu-card-price">Dès 15 €</span></div>
+            <p class="menu-card-desc">Plantes vertes sélectionnées pour leur beauté, leur durabilité et leur originalité.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="menu-category" id="cat-evenements">
+        <div class="menu-grid">
+          <div class="menu-card">
+            <div class="menu-card-top"><span class="menu-card-name">Aménagement cabinet & entreprise</span><span class="menu-card-price">Sur devis</span></div>
+            <p class="menu-card-desc">Aménagement floral intérieur & extérieur, décoration d'accueil et formules d'entretien régulier.</p>
+          </div>
+          <div class="menu-card">
+            <div class="menu-card-top"><span class="menu-card-name">Mariage sur-mesure</span><span class="menu-card-price">Sur devis</span></div>
+            <p class="menu-card-desc">Bouquet de mariée, arches mémorables, centres de table et installations scénographiques complètes.</p>
+            <span class="menu-card-tag">Coup de cœur</span>
+          </div>
+          <div class="menu-card">
+            <div class="menu-card-top"><span class="menu-card-name">Hommage & Deuil</span><span class="menu-card-price">Dès 50 €</span></div>
+            <p class="menu-card-desc">Coussins floraux, gerbes piquées et couronnes douces pour accompagner dignement ces instants.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="page" id="page-galerie">
+    <div class="galerie-wrap">
+      <div class="section-header">
+        <p class="section-eyebrow">Aperçu de notre atelier</p>
+        <h2 class="section-title">Créations & <em>ambiances</em></h2>
+        <p class="section-sub">Explorez notre univers à travers quelques photographies de nos compositions artisanales récentes.</p>
+      </div>
+      <div class="photo-grid">
+        <div class="photo-grid-item tall" onclick="openLightbox('https://images.unsplash.com/photo-1563241527-3004b7be0ffd?auto=format&fit=crop&w=800&q=80')">
+          <img src="https://images.unsplash.com/photo-1563241527-3004b7be0ffd?auto=format&fit=crop&w=800&q=80" alt="Bouquet coloré artisanal" loading="lazy"/>
+        </div>
+        <div class="photo-grid-item" onclick="openLightbox('https://images.unsplash.com/photo-1525310072745-f49212b5ac6d?auto=format&fit=crop&w=800&q=80')">
+          <img src="https://images.unsplash.com/photo-1525310072745-f49212b5ac6d?auto=format&fit=crop&w=800&q=80" alt="Pivoines roses en gros plan" loading="lazy"/>
+        </div>
+        
+        <div class="photo-grid-item" onclick="openLightbox('https://images.unsplash.com/photo-1490750967868-88df5691cc73?auto=format&fit=crop&w=800&q=80')">
+          <img src="https://images.unsplash.com/photo-1490750967868-88df5691cc73?auto=format&fit=crop&w=800&q=80" alt="Roses bouquet classique" loading="lazy"/>
+        </div>
+        <div class="photo-grid-item" onclick="openLightbox('https://images.unsplash.com/photo-1519225421980-715cb0215aed?auto=format&fit=crop&w=800&q=80')">
+          <img src="https://images.unsplash.com/photo-1519225421980-715cb0215aed?auto=format&fit=crop&w=800&q=80" alt="Mariage événement floral" loading="lazy"/>
+        </div>
+        <div class="photo-grid-item wide" onclick="openLightbox('https://images.unsplash.com/photo-1485955900006-10f4d324d411?auto=format&fit=crop&w=800&q=80')">
+          <img src="https://images.unsplash.com/photo-1485955900006-10f4d324d411?auto=format&fit=crop&w=800&q=80" alt="Plantes vertes déco intérieure" loading="lazy"/>
+        </div>
+        <div class="photo-grid-item" onclick="openLightbox('https://images.unsplash.com/photo-1416879595882-3373a0480b5b?auto=format&fit=crop&w=800&q=80')">
+          <img src="https://images.unsplash.com/photo-1416879595882-3373a0480b5b?auto=format&fit=crop&w=800&q=80" alt="Mains artisan fleuriste au travail" loading="lazy"/>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="page" id="page-histoire">
+    <div class="histoire-wrap">
+      <div class="section-header">
+        <p class="section-eyebrow">La passion du végétal</p>
+        <h2 class="section-title">Notre <em>histoire</em></h2>
+      </div>
+      <div class="histoire-hero">
+        <div class="histoire-text">
+          <h2>Antony,<br><em>artisan</em> fleuriste passionné</h2>
+          <p>Antony a fait de sa passion pour les fleurs un métier de cœur. Installé au 35 avenue du Château à Vincennes, Aux fleurs d'Ambre est né du désir profond de proposer des créations florales entièrement sur-mesure, à l'opposé des bouquets industriels standardisés.</p>
+          <p>Chaque composition est longuement pensée pour l'occasion, pour s'harmoniser avec la personne et pour porter l'émotion exacte que vous souhaitez transmettre.</p>
+        </div>
+        <div class="histoire-photo">
+          <img src="https://images.unsplash.com/photo-1416879595882-3373a0480b5b?auto=format&fit=crop&w=800&q=80" alt="Création de bouquet floral" loading="lazy"/>
+        </div>
+      </div>
+      <div class="histoire-values">
+        <div class="value-card">
+          <div class="value-card-icon">🌿</div>
+          <h4>Fraîcheur</h4>
+          <p>Arrivages hebdomadaires et sélection minutieuse de fleurs de saison chez nos producteurs.</p>
+        </div>
+        <div class="value-card">
+          <div class="value-card-icon">🤝</div>
+          <h4>Sur-mesure</h4>
+          <p>Chaque bouquet est une œuvre unique, dessinée et assemblée spécifiquement pour vous.</p>
+        </div>
+        <div class="value-card">
+          <div class="value-card-icon">💚</div>
+          <h4>Local</h4>
+          <p>Fleuriste artisan de quartier fier de s'inscrire au cœur de la vie vincennoise.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="page" id="page-avis">
+    <div class="avis-wrap">
+      <div class="section-header">
+        <p class="section-eyebrow">Les retours de nos clients</p>
+        <h2 class="section-title">Des avis qui nous <em>touchent</em></h2>
+      </div>
+      
+      <div class="avis-summary">
+        <div class="avis-big-score">
+          <div class="avis-big-num">5,0</div>
+          <div class="avis-big-stars">★★★★★</div>
+          <div class="avis-big-count">49 avis sur <strong>Google Maps</strong></div>
+        </div>
+        <a href="https://www.google.fr/maps/place/Aux+fleurs+d%E2%80%99Ambre/@48.847464,2.4368578,17z/data=!4m6!3m5!1s0x47e673b6c4b89c99:0x79a84c1f6445c200!8m2!3d48.847464!4d2.4368578!16s%2Fg%2F11nj9n1bl7?hl=fr&entry=ttu&g_ep=EgoyMDI2MDYwMy4xIKXMDSoASAFQAw%3D%3D" target="_blank" class="avis-google-btn">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+            <circle cx="12" cy="10" r="3"></circle>
+          </svg>
+          Lire les 49 avis Google
+        </a>
+      </div>
+
+      <div class="avis-grid">
+        <div class="avis-card">
+          <div class="avis-card-top">
+            <div class="avis-avatar">PG</div>
+            <div><div class="avis-author">Philippe G.</div><div class="avis-date">Récent · Avis vérifié</div></div>
+          </div>
+          <div class="avis-stars">★★★★★</div>
+          <p class="avis-text">Génial ! Service et convivialité au top... fan de mon bouquet mignon 😘</p>
+        </div>
+        <div class="avis-card">
+          <div class="avis-card-top">
+            <div class="avis-avatar">DB</div>
+            <div><div class="avis-author">Delphine B.</div><div class="avis-date">Récent · Avis vérifié</div></div>
+          </div>
+          <div class="avis-stars">★★★★★</div>
+          <p class="avis-text">Un grand merci à Antony pour l'aménagement floral de mon cabinet médical. Très professionnel, à l'écoute.</p>
+        </div>
+        <div class="avis-card">
+          <div class="avis-card-top">
+            <div class="avis-avatar">YV</div>
+            <div><div class="avis-author">Yona V.</div><div class="avis-date">Récent · Avis vérifié</div></div>
+          </div>
+          <div class="avis-stars">★★★★★</div>
+          <p class="avis-text">Immense merci pour votre accueil chaleureux et professionnalisme. C'est rare des personnes aussi passionnées.</p>
+        </div>
+        <div class="avis-card">
+          <div class="avis-card-top">
+            <div class="avis-avatar">AH</div>
+            <div><div class="avis-author">Ambre H.</div><div class="avis-date">Récent · Avis vérifié</div></div>
+          </div>
+          <div class="avis-stars">★★★★★</div>
+          <p class="avis-text">Très belles compositions, je n'ai pu résister. Bel accueil du vendeur, très commerçant. Je reviendrai.</p>
+        </div>
+        <div class="avis-card">
+          <div class="avis-card-top">
+            <div class="avis-avatar">GA</div>
+            <div><div class="avis-author">Client Google</div><div class="avis-date">Récent · Avis vérifié</div></div>
+          </div>
+          <div class="avis-stars">★★★★★</div>
+          <p class="avis-text">Bouquets magnifiques et accueil charmant. Un plaisir de faire plaisir !</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="page" id="page-contact">
+    <div class="contact-wrap">
+      <div class="contact-info">
+        <h2>Nous trouver</h2>
+        <p>Au cœur de Vincennes, à proximité immédiate du Château.</p>
+        <div class="contact-block">
+          <div class="contact-block-label">Adresse</div>
+          <p>35 Av. du Château<br>94300 Vincennes</p>
+        </div>
+        <div class="contact-block">
+          <div class="contact-block-label">Téléphone</div>
+          <p><a href="tel:0171368546">01 71 36 85 46</a></p>
+        </div>
+        <div class="contact-block">
+          <div class="contact-block-label">Réseaux Sociaux</div>
+          <p>
+            <a href="https://www.instagram.com/auxfleursdambre/" target="_blank">Instagram</a>
+          </p>
+        </div>
+        <div class="contact-block">
+          <div class="contact-block-label">Horaires</div>
+          <div class="horaires-grid">
+            <span class="horaires-day">Lundi</span><span class="horaires-time">Fermé</span>
+            <span class="horaires-day">Mardi</span><span class="horaires-time">9h00 – 20h00</span>
+            <span class="horaires-day">Mercredi</span><span class="horaires-time">9h00 – 20h00</span>
+            <span class="horaires-day">Jeudi</span><span class="horaires-time">9h00 – 20h00</span>
+            <span class="horaires-day">Vendredi</span><span class="horaires-time">9h00 – 20h00</span>
+            <span class="horaires-day">Samedi</span><span class="horaires-time">9h00 – 20h00</span>
+            <span class="horaires-day">Dimanche</span><span class="horaires-time">9h00 – 13h00</span>
+          </div>
+        </div>
+        <div class="contact-block">
+          <div class="contact-block-label">Services proposés</div>
+          <ul class="access-list">
+            <li>Conseil personnalisé en boutique</li>
+            <li>Conception minute de compositions</li>
+            <li>Commandes spéciales sur devis</li>
+            <li>Cartes de paiement acceptées</li>
+          </ul>
+        </div>
+        <div class="map-container">
+          <iframe src="https://maps.google.com/maps?q=Aux+fleurs+d'Ambre+Vincennes+35+avenue+du+château&output=embed" width="100%" height="300" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
+      </div>
+      <div class="contact-form">
+        <h2>Nous écrire</h2>
+        <p>Pour un projet de mariage, un abonnement d'entreprise ou toute demande spécifique.</p>
+        <form action="https://api.web3forms.com/submit" method="POST" onsubmit="showToast('✉️ Message envoyé ! Nous reprenons contact avec vous rapidement.'); setTimeout(() => { event.target.reset(); }, 500);">
+          <input type="hidden" name="access_key" value="d30faa67-b86f-4cb9-890b-c2167e1726ae">
+          <div class="form-group">
+            <label>Votre nom</label>
+            <input type="text" name="Nom_Complet" required placeholder="Marie Dupont" />
+          </div>
+          <div class="form-group">
+            <label>Votre e-mail</label>
+            <input type="email" name="email" required placeholder="marie@email.com" />
+          </div>
+          <div class="form-group">
+            <label>Sujet</label>
+            <select name="Sujet_Demande">
+              <option>Demande d'événement / Mariage</option>
+              <option>Aménagement professionnel / Cabinet médical</option>
+              <option>Commande de composition spécifique</option>
+              <option>Autre demande</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Message</label>
+            <textarea name="message" required placeholder="Bonjour Antony, je souhaitais réaliser…"></textarea>
+          </div>
+          <button type="submit" class="form-submit">Envoyer la demande</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <div class="page" id="page-legales">
+    <div class="legales-wrap">
+      <h1>Documents légaux</h1>
+      <p style="color:var(--gris-pierre);margin-top:0.5rem;font-size:0.9rem;">Informations légales, mentions et politique de confidentialité.</p>
+      <div class="placeholder-notice" style="margin-top:1.5rem;">
+        ⚠️ <strong>À compléter :</strong> Les textes ci-dessous constituent des modèles à affiner avec vos informations juridiques réelles (SIRET) avant toute mise en ligne définitive.
+      </div>
+      <div class="legales-tabs">
+        <button class="legales-tab active" onclick="showLegal('mentions')">Mentions légales</button>
+        <button class="legales-tab" onclick="showLegal('cgv')">CGV</button>
+        <button class="legales-tab" onclick="showLegal('rgpd')">Confidentialité</button>
+      </div>
+      <div class="legales-section active" id="legal-mentions">
+        <h2>Éditeur du site</h2>
+        <p>Raison sociale : Aux fleurs d'Ambre<br>SIRET : [À compléter]<br>Adresse : 35 Avenue du Château, 94300 Vincennes<br>Téléphone : 01 71 36 85 46</p>
+        <h2>Hébergement</h2>
+        <p>Ce site internet est hébergé de façon sécurisée.</p>
+        <h2>Propriété intellectuelle</h2>
+        <p>Les contenus textuels originaux restent la propriété exclusive de l'artisan. Les images d'ambiance sont exploitées sous licence Unsplash libre de droits.</p>
+      </div>
+      <div class="legales-section" id="legal-cgv">
+        <h2>Objet</h2>
+        <p>Les présentes s'appliquent aux commandes passées de façon directe auprès de l'atelier Aux fleurs d'Ambre.</p>
+        <h2>Tarifications</h2>
+        <p>Les tarifs s'entendent exprimés en euros toutes taxes comprises (TTC).</p>
+      </div>
+      <div class="legales-section" id="legal-rgpd">
+        <h2>Données personnelles</h2>
+        <p>Les informations collectées par le formulaire de contact ont pour seule finalité le traitement direct de vos requêtes d'art floral.</p>
+        <h2>Cookies</h2>
+        <p>Ce site met un point d'honneur à ne pas employer de traceurs publicitaires intrusifs.</p>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <div>
+      <div class="footer-logo"><div class="footer-tile-sm"></div>Aux fleurs d'Ambre</div>
+      <p>Fleuriste artisan · Vincennes</p>
+      <p style="margin-top:0.8rem; color:rgba(255,255,255,0.7);">⭐ 5,0 · 49 avis Google</p>
+      <p style="margin-top:0.6rem;">
+        <a href="https://www.instagram.com/auxfleursdambre/" target="_blank" style="color:rgba(255,255,255,0.65); display:inline-block; margin-right:1rem;">Instagram</a>
+      </p>
+    </div>
+    <div>
+      <h4>Navigation</h4>
+      <a onclick="showPage('accueil')">Accueil</a>
+      <a onclick="showPage('creations')">Créations</a>
+      <a onclick="showPage('galerie')">Galerie</a>
+      <a onclick="showPage('histoire')">Notre histoire</a>
+      <a onclick="showPage('avis')">Avis</a>
+      <a onclick="showPage('contact')">Contact</a>
+    </div>
+    <div>
+      <h4>Infos pratiques</h4>
+      <p>35 Av. du Château<br>94300 Vincennes</p>
+      <p style="margin-top:0.4rem;">01 71 36 85 46</p>
+      <p style="margin-top:0.4rem;">Lun : Fermé<br>Mar–Sam : 9h–20h<br>Dim : 9h–13h</p>
+    </div>
+    <div>
+      <h4>Légal</h4>
+      <a onclick="showPage('legales')">Mentions légales</a>
+      <a onclick="showPage('legales')">CGV</a>
+      <a onclick="showPage('legales')">Confidentialité</a>
+    </div>
+  </footer>
+  <div class="footer-bottom">
+    <span>© 2026 Aux fleurs d'Ambre — Vincennes</span>
+    <span>Créations artisanales sur-mesure 🌿</span>
+  </div>
+
+  <div class="lightbox" id="lightbox" onclick="closeLightbox()">
+    <button class="lightbox-close" onclick="closeLightbox()">✕</button>
+    <img id="lightboxImg" src="" alt="" />
+  </div>
+
+  <div class="toast" id="toast"></div>
+
+  <script>
+    function showPage(id) {
+      document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+      document.getElementById('page-' + id).classList.add('active');
+      document.querySelectorAll('.nav-links a').forEach(a => {
+        a.classList.toggle('active', a.dataset.page === id);
+      });
+      window.scrollTo(0, 0);
+      document.getElementById('navLinks').classList.remove('open');
+      history.pushState({}, '', '#' + id);
+    }
+
+    function toggleMenu() {
+      document.getElementById('navLinks').classList.toggle('open');
+    }
+
+    function showCategory(cat, ev) {
+      document.querySelectorAll('.menu-category').forEach(c => c.classList.remove('active'));
+      document.getElementById('cat-' + cat).classList.add('active');
+      document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+      if (ev && ev.target) ev.target.classList.add('active');
+    }
+
+    function showLegal(tab) {
+      document.querySelectorAll('.legales-section').forEach(s => s.classList.remove('active'));
+      document.getElementById('legal-' + tab).classList.add('active');
+      document.querySelectorAll('.legales-tab').forEach(b => b.classList.remove('active'));
+      event.target.classList.add('active');
+    }
+
+    function openLightbox(src) {
+      const lb = document.getElementById('lightbox');
+      const img = document.getElementById('lightboxImg');
+      img.src = src;
+      lb.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeLightbox() {
+      document.getElementById('lightbox').classList.remove('open');
+      document.body.style.overflow = '';
+    }
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLightbox(); });
+
+    function showToast(msg) {
+      const t = document.getElementById('toast');
+      t.textContent = msg; t.classList.add('show');
+      setTimeout(() => t.classList.remove('show'), 2800);
+    }
+
+    function handleHash() {
+      const hash = window.location.hash.replace('#', '');
+      const valid = ['accueil','creations','galerie','histoire','avis','contact','legales'];
+      if (valid.includes(hash)) showPage(hash);
+    }
+
+    window.addEventListener('popstate', handleHash);
+    handleHash();
+  </script>
+</body>
+</html>
