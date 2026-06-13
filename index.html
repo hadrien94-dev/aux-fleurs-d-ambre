@@ -635,11 +635,11 @@
           <button class="btn-primary" onclick="showPage('menu')">Nos créations</button>
           <button class="btn-secondary" onclick="showPage('contact')">Nous trouver →</button>
         </div>
-        <img src="Bouquet.jpg" alt="Bouquet de fleurs" class="hero-photo-mobile" loading="lazy" />
+        <img src="https://images.unsplash.com/photo-1563241598-bc5ac8c4c3b0?w=800" alt="Bouquet de fleurs" class="hero-photo-mobile" loading="lazy" />
       </div>
       <div class="hero-visual">
-        <div class="hero-photo" onclick="openLightbox('Bouquet.jpg')">
-          <img src="Bouquet.jpg" alt="Bouquet de fleurs" loading="lazy" />
+        <div class="hero-photo" onclick="openLightbox('https://images.unsplash.com/photo-1563241598-bc5ac8c4c3b0?w=800')">
+          <img src="https://images.unsplash.com/photo-1563241598-bc5ac8c4c3b0?w=800" alt="Bouquet de fleurs" loading="lazy" />
         </div>
       </div>
     </section>
@@ -751,20 +751,20 @@
         <h2 class="section-title">Notre <em>Galerie</em></h2>
       </div>
       <div class="photo-grid">
-        <div class="photo-grid-item tall" onclick="openLightbox('Bouquet.jpg')">
-          <img src="Bouquet.jpg" alt="Bouquet" loading="lazy"/>
+        <div class="photo-grid-item tall" onclick="openLightbox('https://images.unsplash.com/photo-1563241598-bc5ac8c4c3b0?w=800')">
+          <img src="https://images.unsplash.com/photo-1563241598-bc5ac8c4c3b0?w=800" alt="Bouquet" loading="lazy"/>
         </div>
-        <div class="photo-grid-item" onclick="openLightbox('Pivoines.jpg')">
-          <img src="Pivoines.jpg" alt="Pivoines" loading="lazy"/>
+        <div class="photo-grid-item" onclick="openLightbox('https://images.unsplash.com/photo-1582791694770-bdc220f86230?w=800')">
+          <img src="https://images.unsplash.com/photo-1582791694770-bdc220f86230?w=800" alt="Pivoines" loading="lazy"/>
         </div>
-        <div class="photo-grid-item" onclick="openLightbox('Atelier.jpg')">
-          <img src="Atelier.jpg" alt="Atelier floral" loading="lazy"/>
+        <div class="photo-grid-item" onclick="openLightbox('https://images.unsplash.com/photo-1508784411316-02b8cd4d3a3a?w=800')">
+          <img src="https://images.unsplash.com/photo-1508784411316-02b8cd4d3a3a?w=800" alt="Atelier floral" loading="lazy"/>
         </div>
-        <div class="photo-grid-item wide" onclick="openLightbox('Boutique.jpg')">
-          <img src="Boutique.jpg" alt="Boutique" loading="lazy"/>
+        <div class="photo-grid-item wide" onclick="openLightbox('https://images.unsplash.com/photo-1582214955038-f9b8411b93f1?w=800')">
+          <img src="https://images.unsplash.com/photo-1582214955038-f9b8411b93f1?w=800" alt="Boutique" loading="lazy"/>
         </div>
-        <div class="photo-grid-item" onclick="openLightbox('Fleurs.jpg')">
-          <img src="Fleurs.jpg" alt="Fleurs diverses" loading="lazy"/>
+        <div class="photo-grid-item" onclick="openLightbox('https://images.unsplash.com/photo-1490750967868-88cb4eca8f45?w=800')">
+          <img src="https://images.unsplash.com/photo-1490750967868-88cb4eca8f45?w=800" alt="Fleurs diverses" loading="lazy"/>
         </div>
       </div>
     </div>
@@ -802,6 +802,13 @@
           <div class="avis-big-stars">★★★★★</div>
           <div class="avis-big-count">49 avis sur <strong>Google Maps</strong></div>
         </div>
+        <a href="https://www.google.fr/maps/place/Aux+fleurs+d%E2%80%99Ambre/@48.8474598,2.4369551,15z/data=!4m17!1m8!3m7!1s0x47e673b6c4b89c99:0x79a84c1f6445c200!2sAux+fleurs+d%E2%80%99Ambre!8m2!3d48.847464!4d2.4368578!10e5!16s%2Fg%2F11nj9n1bl7!3m7!1s0x47e673b6c4b89c99:0x79a84c1f6445c200!8m2!3d48.847464!4d2.4368578!9m1!1b1!16s%2Fg%2F11nj9n1bl7?hl=fr&entry=ttu&g_ep=EgoyMDI2MDYxMC4wIKXMDSoASAFQAw%3D%3D" target="_blank" class="avis-google-btn">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+            <circle cx="12" cy="10" r="3"></circle>
+          </svg>
+          Lire les avis Google
+        </a>
       </div>
 
       <div class="avis-grid">
@@ -881,7 +888,8 @@
       <div class="contact-form">
         <h2>Nous écrire</h2>
         <p>Pour une commande spéciale, un mariage ou un événement d'entreprise.</p>
-        <form action="#" method="POST" onsubmit="showToast('✉️ Message envoyé ! Nous vous répondrons rapidement.'); setTimeout(function(){ event.target.reset(); }, 500); event.preventDefault();">
+        <form action="https://api.web3forms.com/submit" method="POST" onsubmit="showToast('✉️ Message envoyé ! Nous vous répondrons rapidement.'); setTimeout(function(){ event.target.reset(); }, 500);">
+          <input type="hidden" name="access_key" value="d30faa67-b86f-4cb9-890b-c2167e1726ae">
           <div class="form-group">
             <label>Votre nom</label>
             <input type="text" name="Nom_Complet" required placeholder="Marie Dupont" />
