@@ -591,17 +591,17 @@
 <body>
 
   <nav>
-    <div class="nav-logo" onclick="showPage('accueil')">
+    <a href="#accueil" class="nav-logo">
       <div class="nav-logo-tile"></div>
       Aux fleurs d'Ambre
-    </div>
+    </a>
     <ul class="nav-links" id="navLinks">
-      <li><a onclick="showPage('accueil')" data-page="accueil">Accueil</a></li>
-      <li><a onclick="showPage('menu')" data-page="menu">Créations</a></li>
-      <li><a onclick="showPage('galerie')" data-page="galerie">Galerie</a></li>
-      <li><a onclick="showPage('histoire')" data-page="histoire">Atelier</a></li>
-      <li><a onclick="showPage('avis')" data-page="avis">Avis</a></li>
-      <li><a onclick="showPage('contact')" data-page="contact">Contact</a></li>
+      <li><a href="#accueil">Accueil</a></li>
+      <li><a href="#menu">Créations</a></li>
+      <li><a href="#galerie">Galerie</a></li>
+      <li><a href="#histoire">Atelier</a></li>
+      <li><a href="#avis">Avis</a></li>
+      <li><a href="#contact">Contact</a></li>
     </ul>
     
     <div class="nav-controls">
@@ -639,8 +639,8 @@
           <span class="pill">🏢 Aménagement pro</span>
         </div>
         <div class="hero-actions">
-          <button class="btn-primary" onclick="showPage('menu')">Nos créations</button>
-          <button class="btn-secondary" onclick="showPage('contact')">Nous trouver →</button>
+          <button class="btn-primary" onclick="window.location.hash='menu'">Nos créations</button>
+          <button class="btn-secondary" onclick="window.location.hash='contact'">Nous trouver →</button>
         </div>
         <img src="Bouquet.jpg" alt="Bouquet de fleurs" class="hero-photo-mobile" loading="lazy" />
       </div>
@@ -1085,12 +1085,12 @@
     </div>
     <div>
       <h4>Navigation</h4>
-      <a onclick="showPage('accueil')">Accueil</a>
-      <a onclick="showPage('menu')">Créations</a>
-      <a onclick="showPage('galerie')">Galerie</a>
-      <a onclick="showPage('histoire')">Notre atelier</a>
-      <a onclick="showPage('avis')">Avis</a>
-      <a onclick="showPage('contact')">Contact</a>
+      <a href="#accueil">Accueil</a>
+      <a href="#menu">Créations</a>
+      <a href="#galerie">Galerie</a>
+      <a href="#histoire">Notre atelier</a>
+      <a href="#avis">Avis</a>
+      <a href="#contact">Contact</a>
     </div>
     <div>
       <h4>Infos pratiques</h4>
@@ -1112,16 +1112,26 @@
   <div class="toast" id="toast"></div>
 
   <script>
-    function showPage(id) {
+    function updatePageFromHash() {
+      var hash = window.location.hash.substring(1);
+      if (!hash) {
+        hash = 'accueil';
+      }
       var pages = document.querySelectorAll('.page');
       for(var i = 0; i < pages.length; i++) {
         pages[i].classList.remove('active');
       }
-      document.getElementById('page-' + id).classList.add('active');
+      var targetPage = document.getElementById('page-' + hash);
+      if (targetPage) {
+        targetPage.classList.add('active');
+      } else {
+        document.getElementById('page-accueil').classList.add('active');
+        hash = 'accueil';
+      }
       var links = document.querySelectorAll('.nav-links a');
       for(var j = 0; j < links.length; j++) {
         var a = links[j];
-        if(a.getAttribute('data-page') === id) {
+        if(a.getAttribute('href') === '#' + hash) {
           a.classList.add('active');
         } else {
           a.classList.remove('active');
@@ -1130,6 +1140,9 @@
       window.scrollTo(0, 0);
       document.getElementById('navLinks').classList.remove('open');
     }
+
+    window.addEventListener('hashchange', updatePageFromHash);
+    window.addEventListener('DOMContentLoaded', updatePageFromHash);
 
     function toggleMenu() {
       document.getElementById('navLinks').classList.toggle('open');
