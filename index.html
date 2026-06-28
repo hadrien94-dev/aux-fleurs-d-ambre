@@ -308,6 +308,44 @@
       padding: 0.5rem 0.8rem; border-radius: 4px;
     }
 
+    /* ====== CSS AJOUTÉ POUR LA SECTION COMMANDER ====== */
+    #page-commander { background: var(--warm-cream); }
+    .commander-wrap { max-width: 1080px; margin: 0 auto; padding: 5rem 2rem; }
+    .commander-layout { display: grid; grid-template-columns: 1.4fr 1fr; gap: 2.5rem; align-items: start; }
+    .commander-products { display: flex; flex-direction: column; gap: 1.2rem; }
+    .order-card { background: var(--white); border: 1px solid var(--warm-border); border-radius: 10px; padding: 1.1rem 1.3rem; display: flex; align-items: center; gap: 1.2rem;  }
+    .order-card-img { width: 80px; height: 80px; border-radius: 8px; overflow: hidden; flex-shrink: 0; }
+    .order-card-img img { width: 100%; height: 100%; object-fit: cover; }
+    .order-card-content { display: flex; flex: 1; align-items: center; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+    .order-card-info { flex: 1; min-width: 180px; }
+    .order-card-name { font-family: 'Playfair Display', serif; font-weight: 600; font-size: 1rem; color: var(--ink); }
+    .order-card-desc { font-size: 0.8rem; color: var(--ink-muted); margin-top: 0.2rem; line-height: 1.5; }
+    .order-card-price { font-weight: 700; color: var(--rose); font-size: 0.92rem; margin-top: 0.4rem; }
+    .order-qty { display: flex; align-items: center; gap: 0.6rem; border: 1.5px solid var(--cream-mid); border-radius: 30px; padding: 0.25rem 0.4rem; }
+    .qty-btn { width: 26px; height: 26px; border-radius: 50%; border: none; background: var(--green-pale); color: var(--green); font-weight: 700; cursor: pointer; font-size: 0.9rem; line-height: 1; display: flex; align-items: center; justify-content: center; }
+    .qty-btn:hover { background: var(--green); color: var(--white); }
+    .qty-value { min-width: 18px; text-align: center; font-weight: 600; font-size: 0.9rem; }
+    .commander-summary { background: var(--white); border: 1px solid var(--green-pale); border-radius: 10px; padding: 1.6rem; position: sticky; top: 88px; }
+    .commander-summary h3 { font-family: 'Playfair Display', serif; font-size: 1.15rem; margin-bottom: 1rem; }
+    .cart-empty { font-size: 0.85rem; color: var(--ink-muted); font-style: italic; }
+    .cart-line { display: flex; justify-content: space-between; font-size: 0.85rem; padding: 0.4rem 0; border-bottom: 1px dashed var(--cream-mid); color: var(--ink); }
+    .cart-line span:last-child { color: var(--ink-muted); }
+    .cart-total { display: flex; justify-content: space-between; font-weight: 700; font-size: 0.95rem; margin-top: 0.8rem; padding-top: 0.8rem; border-top: 1.5px solid var(--green-pale); color: var(--green); }
+    .commander-divider { height: 1px; background: var(--green-pale); margin: 1.4rem 0; }
+    .pickup-row { display: grid; grid-template-columns: 1fr 1fr; gap: 0.8rem; }
+    .commander-note { font-size: 0.78rem; color: var(--ink-muted); line-height: 1.6; background: var(--warm-cream); border-radius: 6px; padding: 0.7rem 0.9rem; margin-top: 1rem; }
+
+    .form-submit { display: flex; align-items: center; justify-content: center; gap: 0.5rem; }
+    .form-submit:disabled { background: var(--ink-muted); cursor: not-allowed; }
+    .spinner { width: 14px; height: 14px; border-radius: 50%; border: 2px solid rgba(255,255,255,0.4); border-top-color: var(--white); animation: spin 0.7s linear infinite; display: none; }
+    .form-submit.loading .spinner { display: inline-block; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    .form-error { font-size: 0.8rem; color: var(--rose); margin-top: 0.8rem; display: none; }
+    .form-error.show { display: block; }
+    .toast-inline { display: none; align-items: center; gap: 0.6rem; background: var(--green-pale); color: var(--green); padding: 0.75rem 1rem; border-radius: 6px; font-size: 0.85rem; font-weight: 600; margin-top: 1rem; }
+    .toast-inline.show { display: flex; animation: fadeMenu 0.35s ease-out forwards; }
+    /* ================================================= */
+
     #page-galerie { background: var(--cream); }
     
     .galerie-wrap { max-width: 1200px; margin: 0 auto; padding: 5rem 2rem; }
@@ -507,14 +545,6 @@
     .form-group input:focus, .form-group textarea:focus { outline: none; border-color: var(--green); }
     .form-group textarea { resize: vertical; min-height: 110px; }
     
-    .form-submit {
-      width: 100%; background: var(--green); color: var(--white);
-      border: none; border-radius: 5px; padding: 0.9rem;
-      font-size: 0.88rem; font-weight: 700; cursor: pointer;
-      transition: background 0.2s; letter-spacing: 0.04em;
-    }
-    .form-submit:hover { background: var(--green-light); }
-
     .map-container {
       width: 100%; margin-top: 2rem; border-radius: 8px; overflow: hidden;
       border: 1px solid var(--green-pale); box-shadow: 0 4px 12px rgba(44,76,59,0.05);
@@ -576,15 +606,27 @@
       }
       .nav-links.open { max-height: 400px; opacity: 1; transform: translateY(0); padding: 1.5rem 2rem; border-bottom: 1px solid var(--cream-mid); }
       .nav-controls { gap: 1rem; }
+      .nav-cta-btn { display: none; } /* Added for responsive menu CTA */
       .map-btn { display: none; }
       .nav-burger { display: flex; }
       .photo-grid { grid-template-columns: 1fr 1fr; }
+      
+      /* Media queries pour la section Commander */
+      .commander-layout { grid-template-columns: 1fr; }
+      .commander-summary { position: static; }
     }
     
     @media (max-width: 580px) {
       .photo-grid { grid-template-columns: 1fr; grid-auto-rows: 220px; }
       .photo-grid-item.tall, .photo-grid-item.wide { grid-row: span 1; grid-column: span 1; }
       .histoire-values { grid-template-columns: 1fr; }
+
+      /* Media queries pour la section Commander */
+      .pickup-row { grid-template-columns: 1fr; }
+      .order-card { flex-direction: column; align-items: stretch; text-align: center; }
+      .order-card-img { width: 100%; height: 140px; margin-bottom: 0.5rem; }
+      .order-card-content { flex-direction: column; }
+      .order-qty { justify-content: center; }
     }
   </style>
 </head>
@@ -598,13 +640,14 @@
     <ul class="nav-links" id="navLinks">
       <li><a href="#accueil">Accueil</a></li>
       <li><a href="#menu">Créations</a></li>
-      <li><a href="#galerie">Galerie</a></li>
+      <li><a href="#commander">Commander</a></li> <li><a href="#galerie">Galerie</a></li>
       <li><a href="#histoire">Atelier</a></li>
       <li><a href="#avis">Avis</a></li>
       <li><a href="#contact">Contact</a></li>
     </ul>
     
     <div class="nav-controls">
+      <a href="#commander" class="nav-social-btn nav-cta-btn" style="padding:0.55rem 1.1rem; text-transform:none; letter-spacing:0; font-size:0.82rem;">Commander</a>
       <div class="nav-socials">
         <a href="https://www.instagram.com/auxfleursdambre/" target="_blank" class="nav-social-btn icon-only" title="Instagram">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -751,6 +794,142 @@
     </div>
   </div>
 
+  <div class="page" id="page-commander">
+    <div class="commander-wrap">
+      <div class="section-header">
+        <p class="section-eyebrow">Commande en ligne</p>
+        <h2 class="section-title">Commander pour un <em>retrait en boutique</em></h2>
+        <p class="section-sub">Choisissez vos fleurs, le jour et l'heure qui vous conviennent : nous préparons votre commande pour un retrait direct au 35 Av. du Château.</p>
+      </div>
+
+      <form id="orderForm">
+        <div class="commander-layout">
+          <div class="commander-products" id="orderProducts">
+            
+            <div class="order-card" data-name="Bouquet de Saison" data-price="35">
+              <div class="order-card-img"><img src="Bouquet.jpg" alt="Bouquet de saison"></div>
+              <div class="order-card-content">
+                <div class="order-card-info">
+                  <div class="order-card-name">Bouquet de Saison</div>
+                  <div class="order-card-desc">Composition champêtre assemblée avec les plus belles fleurs du jour.</div>
+                  <div class="order-card-price">Dès 35 €</div>
+                </div>
+                <div class="order-qty">
+                  <button type="button" class="qty-btn" onclick="changeQty(this,-1)">−</button>
+                  <span class="qty-value">0</span>
+                  <button type="button" class="qty-btn" onclick="changeQty(this,1)">+</button>
+                </div>
+              </div>
+            </div>
+
+            <div class="order-card" data-name="Pivoines Élégantes" data-price="0">
+              <div class="order-card-img"><img src="pivoines.jpg" alt="Pivoines"></div>
+              <div class="order-card-content">
+                <div class="order-card-info">
+                  <div class="order-card-name">Pivoines Élégantes</div>
+                  <div class="order-card-desc">La fleur reine du printemps, majestueuse et parfumée (selon saison).</div>
+                  <div class="order-card-price">Sur demande</div>
+                </div>
+                <div class="order-qty">
+                  <button type="button" class="qty-btn" onclick="changeQty(this,-1)">−</button>
+                  <span class="qty-value">0</span>
+                  <button type="button" class="qty-btn" onclick="changeQty(this,1)">+</button>
+                </div>
+              </div>
+            </div>
+
+            <div class="order-card" data-name="Brassée de Roses" data-price="40">
+              <div class="order-card-img"><img src="Fleurs.jpg" alt="Roses"></div>
+              <div class="order-card-content">
+                <div class="order-card-info">
+                  <div class="order-card-name">Brassée de Roses</div>
+                  <div class="order-card-desc">L'incontournable preuve d'amour, en roses rouges, roses ou blanches.</div>
+                  <div class="order-card-price">Dès 40 €</div>
+                </div>
+                <div class="order-qty">
+                  <button type="button" class="qty-btn" onclick="changeQty(this,-1)">−</button>
+                  <span class="qty-value">0</span>
+                  <button type="button" class="qty-btn" onclick="changeQty(this,1)">+</button>
+                </div>
+              </div>
+            </div>
+
+            <div class="order-card" data-name="Composition sur-mesure (mariage, devis...)" data-price="0">
+              <div class="order-card-img"><img src="Atelier.jpg" alt="Composition florale"></div>
+              <div class="order-card-content">
+                <div class="order-card-info">
+                  <div class="order-card-name">Composition sur-mesure</div>
+                  <div class="order-card-desc">Mariage, événementiel, aménagement pro — précisez votre besoin dans les notes ci-contre.</div>
+                  <div class="order-card-price">Sur devis</div>
+                </div>
+                <div class="order-qty">
+                  <button type="button" class="qty-btn" onclick="changeQty(this,-1)">−</button>
+                  <span class="qty-value">0</span>
+                  <button type="button" class="qty-btn" onclick="changeQty(this,1)">+</button>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          <div class="commander-summary">
+            <h3>Votre commande</h3>
+            <div id="cartLines"><p class="cart-empty">Aucun article sélectionné pour le moment.</p></div>
+            <div class="cart-total" id="cartTotal" style="display:none;"><span>Total estimé</span><span id="cartTotalValue">0 €</span></div>
+
+            <div class="commander-divider"></div>
+
+            <div class="form-group">
+              <label>Votre nom</label>
+              <input type="text" id="orderName" required placeholder="Marie Dupont" />
+            </div>
+            <div class="form-group">
+              <label>Téléphone</label>
+              <input type="tel" id="orderPhone" required placeholder="06 12 34 56 78" />
+            </div>
+            <div class="form-group">
+              <label>E-mail</label>
+              <input type="email" id="orderEmail" required placeholder="marie@email.com" />
+            </div>
+            <div class="pickup-row">
+              <div class="form-group">
+                <label>Date de retrait</label>
+                <input type="date" id="orderDate" required />
+              </div>
+              <div class="form-group">
+                <label>Heure souhaitée</label>
+                <select id="orderTime" required>
+                  <option value="">Choisir...</option>
+                  <option>10h00</option><option>10h15</option><option>10h30</option><option>10h45</option>
+                  <option>11h00</option><option>11h15</option><option>11h30</option><option>11h45</option>
+                  <option>12h00</option><option>12h15</option><option>12h30</option><option>12h45</option>
+                  <option>13h00</option>
+                  <option>15h00</option><option>15h15</option><option>15h30</option><option>15h45</option>
+                  <option>16h00</option><option>16h15</option><option>16h30</option><option>16h45</option>
+                  <option>17h00</option><option>17h15</option><option>17h30</option><option>17h45</option>
+                  <option>18h00</option><option>18h15</option><option>18h30</option><option>18h45</option>
+                  <option>19h00</option><option>19h15</option><option>19h30</option><option>19h45</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-group">
+              <label>Notes (couleurs, occasion...)</label>
+              <textarea id="orderNotes" placeholder="Par exemple : bouquet pour un anniversaire, tons roses et blancs."></textarea>
+            </div>
+
+            <button type="submit" class="form-submit" id="orderSubmitBtn">
+              <span class="spinner"></span>
+              <span id="orderSubmitLabel">Envoyer ma demande de commande</span>
+            </button>
+            <p class="form-error" id="orderError">Une erreur est survenue. Merci de réessayer ou de nous appeler au 06 69 74 06 81.</p>
+            <div class="toast-inline" id="orderToastInline">✓ Demande envoyée ! Nous vous confirmons la commande par téléphone.</div>
+
+            <p class="commander-note">Cette commande est une <strong>demande de réservation</strong> : nous vous recontactons rapidement pour confirmer la disponibilité, le prix exact et l'horaire de retrait. La boutique est fermée le lundi et le dimanche — merci de choisir un autre jour.</p>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
   <div class="page" id="page-galerie">
     <div class="galerie-wrap">
       <div class="section-header">
@@ -1087,6 +1266,7 @@
       <h4>Navigation</h4>
       <a href="#accueil">Accueil</a>
       <a href="#menu">Créations</a>
+      <a href="#commander">Commander</a>
       <a href="#galerie">Galerie</a>
       <a href="#histoire">Notre atelier</a>
       <a href="#avis">Avis</a>
@@ -1186,6 +1366,150 @@
         t.classList.remove('show');
       }, 2800);
     }
+
+    // ====== LOGIQUE JS AJOUTÉE POUR LA SECTION COMMANDER ====== //
+    function changeQty(btn, delta) {
+      var card = btn.closest('.order-card');
+      var span = card.querySelector('.qty-value');
+      var val = Math.max(0, parseInt(span.textContent, 10) + delta);
+      span.textContent = val;
+      updateCart();
+    }
+
+    function updateCart() {
+      var cards = document.querySelectorAll('#orderProducts .order-card');
+      var lines = [];
+      var total = 0;
+      var hasOnDevis = false;
+
+      cards.forEach(function (card) {
+        var qty = parseInt(card.querySelector('.qty-value').textContent, 10);
+        if (qty > 0) {
+          var name = card.getAttribute('data-name');
+          var price = parseFloat(card.getAttribute('data-price'));
+          if (price > 0) {
+            total += price * qty;
+            lines.push({ name: name, qty: qty, label: (price * qty) + ' €' });
+          } else {
+            hasOnDevis = true;
+            lines.push({ name: name, qty: qty, label: 'Sur demande' });
+          }
+        }
+      });
+
+      var cartLinesEl = document.getElementById('cartLines');
+      var cartTotalEl = document.getElementById('cartTotal');
+
+      if (lines.length === 0) {
+        cartLinesEl.innerHTML = '<p class="cart-empty">Aucun article sélectionné pour le moment.</p>';
+        cartTotalEl.style.display = 'none';
+        return;
+      }
+
+      cartLinesEl.innerHTML = lines.map(function (l) {
+        return '<div class="cart-line"><span>' + l.qty + ' × ' + l.name + '</span><span>' + l.label + '</span></div>';
+      }).join('');
+
+      document.getElementById('cartTotalValue').textContent = (hasOnDevis ? 'à partir de ' : '') + total + ' €';
+      cartTotalEl.style.display = 'flex';
+    }
+
+    function getCartSummaryText() {
+      var cards = document.querySelectorAll('#orderProducts .order-card');
+      var parts = [];
+      cards.forEach(function (card) {
+        var qty = parseInt(card.querySelector('.qty-value').textContent, 10);
+        if (qty > 0) parts.push(qty + ' × ' + card.getAttribute('data-name'));
+      });
+      return parts.join(', ');
+    }
+
+    var orderDateInput = document.getElementById('orderDate');
+    if (orderDateInput) {
+      var todayISO = new Date().toISOString().split('T')[0];
+      orderDateInput.setAttribute('min', todayISO);
+      orderDateInput.addEventListener('change', function () {
+        var d = new Date(this.value + 'T00:00:00');
+        if (this.value && (d.getDay() === 1 || d.getDay() === 0)) {
+          this.setCustomValidity('La boutique est fermée le dimanche et lundi, merci de choisir un autre jour.');
+          this.reportValidity();
+        } else {
+          this.setCustomValidity('');
+        }
+      });
+    }
+
+    var orderForm = document.getElementById('orderForm');
+    if (orderForm) {
+      orderForm.addEventListener('submit', function (event) {
+        event.preventDefault();
+
+        var cartText = getCartSummaryText();
+        if (!cartText) {
+          alert('Merci de sélectionner au moins un article avant d\'envoyer votre demande.');
+          return;
+        }
+
+        var dateVal = document.getElementById('orderDate').value;
+        var dObj = new Date(dateVal + 'T00:00:00');
+        if (dateVal && (dObj.getDay() === 1 || dObj.getDay() === 0)) {
+          alert('La boutique est fermée le dimanche et lundi, merci de choisir un autre jour de retrait.');
+          return;
+        }
+
+        var orderSubmitBtn = document.getElementById('orderSubmitBtn');
+        var orderSubmitLabel = document.getElementById('orderSubmitLabel');
+        var orderError = document.getElementById('orderError');
+        var orderToastInline = document.getElementById('orderToastInline');
+
+        orderError.classList.remove('show');
+        orderToastInline.classList.remove('show');
+        orderSubmitBtn.disabled = true;
+        orderSubmitBtn.classList.add('loading');
+        orderSubmitLabel.textContent = 'Envoi en cours...';
+
+        var payload = {
+          access_key: 'd30faa67-b86f-4cb9-890b-c2167e1726ae',
+          subject: 'Nouvelle demande de commande — Aux fleurs d\'Ambre',
+          Nom_Complet: document.getElementById('orderName').value,
+          Telephone: document.getElementById('orderPhone').value,
+          email: document.getElementById('orderEmail').value,
+          Commande: cartText,
+          Date_Retrait_Souhaitee: dateVal,
+          Heure_Retrait_Souhaitee: document.getElementById('orderTime').value,
+          Notes: document.getElementById('orderNotes').value
+        };
+
+        fetch('https://api.web3forms.com/submit', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+          body: JSON.stringify(payload)
+        })
+          .then(function (response) { return response.json(); })
+          .then(function (data) {
+            orderSubmitBtn.disabled = false;
+            orderSubmitBtn.classList.remove('loading');
+            orderSubmitLabel.textContent = 'Envoyer ma demande de commande';
+
+            if (data && data.success) {
+              orderForm.reset();
+              document.querySelectorAll('#orderProducts .qty-value').forEach(function (s) { s.textContent = '0'; });
+              updateCart();
+              orderToastInline.classList.add('show');
+              showToast('🌸 Demande de commande envoyée !');
+            } else {
+              orderError.classList.add('show');
+            }
+          })
+          .catch(function () {
+            orderSubmitBtn.disabled = false;
+            orderSubmitBtn.classList.remove('loading');
+            orderSubmitLabel.textContent = 'Envoyer ma demande de commande';
+            orderError.classList.add('show');
+          });
+      });
+    }
+    // ========================================================== //
   </script>
 </body>
 </html>
